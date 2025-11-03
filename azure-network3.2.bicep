@@ -262,8 +262,8 @@ resource webVM 'Microsoft.Compute/virtualMachines@2023-07-01' = {
     storageProfile: {
       imageReference: {
         publisher: 'Canonical'
-        offer: 'UbuntuServer'
-        sku: '22_04-lts'
+        offer: '0001-com-ubuntu-server-jammy'
+        sku: '22_04-lts-gen2'
         version: 'latest'
       }
       osDisk: {
@@ -300,8 +300,8 @@ resource appVM 'Microsoft.Compute/virtualMachines@2023-07-01' = {
     storageProfile: {
       imageReference: {
         publisher: 'Canonical'
-        offer: 'UbuntuServer'
-        sku: '22_04-lts'
+        offer: '0001-com-ubuntu-server-jammr'
+        sku: '22_04-lts-gen2'
         version: 'latest'
       }
       osDisk: {
