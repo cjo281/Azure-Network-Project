@@ -167,7 +167,7 @@ resource appNSG 'Microsoft.Network/networkSecurityGroups@2023-04-01' = {
 
 /*======================================================================================*/
 /*Create "Public IP" for the NAT gateway*/
-/*2023-04-01 is the most updated ip*/
+/*2023-04-01 is the most updated ip according to the official website*/
 resource natPublicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: natPublicIPName
   location: location
