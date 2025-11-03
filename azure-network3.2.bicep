@@ -320,7 +320,7 @@ resource appVM 'Microsoft.Compute/virtualMachines@2023-07-01' = {
 
 /*======================================================================================*/
 /*Enable Monitoring on VMs */
-resource logWorkspace 'Microsoft.OperationalInsights/workspaces@2023-07-01' = {
+resource logWorkspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: workspaceName
   location: location
   properties: {
