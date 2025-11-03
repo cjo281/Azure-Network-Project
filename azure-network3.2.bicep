@@ -18,7 +18,7 @@ var webIP = '10.0.1.4'
 var appIP = '10.0.2.4'
 var natPublicIPName = 'MyNATPublicIP3.2'
 var natGatewayName = 'MyNAT3.2'
-var workspaceName = 'MyLogWorkspace3.2'
+var workspaceName = 'MyLogWorkspace32'
 
 /*======================================================================================*/
 
