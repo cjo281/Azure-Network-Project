@@ -1,0 +1,28 @@
+name: Deploy Azure Bicep Project
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - azure-network3.2.bicep
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Bicep file
+      run: |
+        az deployment group create \
+          --resource-group NetRG2 \
+          --template-file azure-network3.2.bicep \
+          --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}'
