@@ -1,0 +1,27 @@
+#Captures outputs from deployment and logs them
+name: Capture Deployment Outputs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - azure-network3.2.bicep
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy and Capture Outputs
+        run: |
+          az deployment group create \
+            --resource-group NetRG2 \
+            --template-file azure-network3.2.bicep \
+            --parameters adminUsername='azureuser3.2' adminPassword='${{ secrets.ADMIN_PASSWORD }}' \
+            --query "properties.outputs"

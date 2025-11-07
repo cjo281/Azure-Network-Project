@@ -1,0 +1,22 @@
+#Implements auto-rollback logic (manual or triggered by failure
+name: Rollback Deployment
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Rollback to Previous Template
+        run: |
+          az deployment group create \
+            --resource-group NetRG2 \
+            --template-file azure-network-backup.bicep \
+            --parameters adminUsername='azureuser3.2' adminPassword='${{ secrets.ADMIN_PASSWORD }}'

@@ -1,0 +1,29 @@
+#Adds approval gates for production deployments
+name: Production Deployment with Approval
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://yourapp.com
+      reviewers: [team-lead]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy with Approval
+        run: |
+          az deployment group create \
+            --resource-group NetRG2 \
+            --template-file azure-network3.2.bicep \
+            --parameters adminUsername='azureuser3.2' adminPassword='${{ secrets.ADMIN_PASSWORD }}'

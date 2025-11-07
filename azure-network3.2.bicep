@@ -16,8 +16,10 @@ var webVMName = 'WebVM3.2'
 var appVMName = 'AppVM3.2'
 var webIP = '10.0.1.4'
 var appIP = '10.0.2.4'
+/*
 var natPublicIPName = 'MyNATPublicIP3.2'
 var natGatewayName = 'MyNAT3.2'
+*/
 var workspaceName = 'MyLogWorkspace32'
 
 /*======================================================================================*/
@@ -38,10 +40,11 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {      /*API late
           addressPrefix: '10.0.1.0/24'
           networkSecurityGroup: {
             id: webNSG.id
-          }
+          } /*
           natGateway: {
             id: natGateway.id
           }
+            */
         }
       }
       {
@@ -50,10 +53,11 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {      /*API late
           addressPrefix: '10.0.2.0/24'
           networkSecurityGroup: {
             id: appNSG.id
-          }
+          } /*
           natGateway: {
             id: natGateway.id
           }
+          */
         }
       }
     ]
@@ -168,6 +172,7 @@ resource appNSG 'Microsoft.Network/networkSecurityGroups@2023-04-01' = {
 /*======================================================================================*/
 /*Create "Public IP" for the NAT gateway*/
 /*2023-04-01 is the most updated ip according to the official website*/
+/*
 resource natPublicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: natPublicIPName
   location: location
@@ -178,10 +183,10 @@ resource natPublicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
     publicIPAllocationMethod: 'Static'
   }
 }
-
+*/
 /*======================================================================================*/
 /*Create NAT gateway so you can update it with the IP public you just created in the previous step*/
-
+/*
 resource natGateway 'Microsoft.Network/natGateways@2023-04-01' = {
   name: natGatewayName
   location: location
@@ -196,7 +201,7 @@ resource natGateway 'Microsoft.Network/natGateways@2023-04-01' = {
     ]
   }
 }
-
+*/
 /*======================================================================================*/
 /*Create NICs for the Virtual Machines*/
 /*Create NIC for webVM */

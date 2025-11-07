@@ -1,0 +1,25 @@
+#Adds scheduled triggers to deploy at specific times (e.g., nightly or weekl
+name: Scheduled Deployment
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Every day at 2 AM UTC
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Scheduled Bicep Deployment
+        run: |
+          az deployment group create \
+            --resource-group NetRG2 \
+            --template-file azure-network3.2.bicep \
+            --parameters adminUsername='azureuser3.2' adminPassword='${{ secrets.ADMIN_PASSWORD }}'
