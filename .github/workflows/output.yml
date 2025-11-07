@@ -11,10 +11,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: staging
 
     steps:
       - name: Azure Login
         uses: azure/login@v1
+        
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 

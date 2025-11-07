@@ -7,6 +7,7 @@ on:
 jobs:
   rollback:
     runs-on: ubuntu-latest
+    environment: staging
 
     steps:
       - name: Azure Login

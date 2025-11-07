@@ -335,3 +335,6 @@ resource logWorkspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
     retentionInDays: 30
   }
 }
+output webVMIP string = webIP
+output appVMIP string = appIP
+output workspaceId string = logWorkspace.id
