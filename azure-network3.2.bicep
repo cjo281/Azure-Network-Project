@@ -2,7 +2,7 @@
 #Name: CLI Deployment in "Bicep File"*/
 /*test*/
 param location string = 'eastus'
-param resourceName string = 'NetRG3.2'
+param resourceName string = 'NetRG2'
 param adminUsername string = 'azureuser3.2'
 @secure()
 param adminPassword string
