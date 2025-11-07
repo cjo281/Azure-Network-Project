@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Production
-      url: https://yourapp.com
-      reviewers: [@cjo281]
+      #url: https://yourapp.com
+      reviewers: [cjo281]
 
     steps:
       - name: Checkout
