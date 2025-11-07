@@ -10,7 +10,7 @@ jobs:
     environment:
       name: Production
       #url: https://yourapp.com
-      reviewers: [cjo281]
+      
 #updated reviewers
     steps:
       - name: Checkout
