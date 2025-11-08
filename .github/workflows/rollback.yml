@@ -20,4 +20,4 @@ jobs:
           az deployment group create \
             --resource-group NetRG2 \
             --template-file azure-network3.2-backup.bicep \
-            --parameters adminUsername='azureuser3.2' adminPassword='${{ secrets.ADMIN_PASSWORD }}'
+            --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}'
