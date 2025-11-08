@@ -10,6 +10,9 @@ jobs:
     environment: staging
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Azure Login
         uses: azure/login@v1
         with:
@@ -21,3 +24,4 @@ jobs:
             --resource-group NetRG2 \
             --template-file azure-network3.2-backup.bicep \
             --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}'
+            --query "properties.outputs"

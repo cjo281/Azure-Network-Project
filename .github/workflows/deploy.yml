@@ -29,3 +29,4 @@ jobs:
           --resource-group NetRG2 \
           --template-file azure-network3.2.bicep \
           --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}'
+          --query "properties.outputs"
