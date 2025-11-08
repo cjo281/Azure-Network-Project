@@ -1,3 +1,10 @@
+
+#--------------------------------------------------------------
+#You're approving a specific run of that workflow
+#That run will execute the deployment steps defined in the YAML.
+#In this case, deploying your azure-network3.2.bicep file to Azure
+#----------------------------------------------------------------
+
 #Adds approval gates for production deployments
 name: Production Deployment with Approval
 
