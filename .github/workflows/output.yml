@@ -5,8 +5,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - azure-network3.2.bicep
+    #paths:
+    #  - azure-network3.2.bicep
 
 jobs:
   deploy:
