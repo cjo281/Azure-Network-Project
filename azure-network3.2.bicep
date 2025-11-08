@@ -3,7 +3,7 @@
 /*test*/
 param location string = 'eastus'
 /*param resourceName string = 'NetRG2'*/
-param adminUsername string = 'azureuser3.2'
+param adminUsername string = 'azureuser'
 @secure()
 param adminPassword string
 
