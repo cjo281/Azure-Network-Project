@@ -23,6 +23,7 @@ jobs:
         run: |
           az deployment group create \
             --resource-group NetRG2 \
+            --name azure-network3.2-${{ github.run_id }} \
             --template-file azure-network3.2.bicep \
             --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}'
             --query "properties.outputs"
