@@ -2,12 +2,22 @@
 name: Rollback Deployment
 
 on:
-  workflow_dispatch:
+  #workflow_dispatch:   #run manually (run workfow button)
+       # Manual trigger from Actions tab
+
+  # Optional: Automatically run rollback if main deployment fails
+  # Uncomment below to enable auto-rollback
+  workflow_run:
+    workflows: ["Deploy Azure Bicep Project"]
+    types:
+        - completed
 
 jobs:
   rollback:
     runs-on: ubuntu-latest
     environment: staging
+
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'failure' }}
 
     steps:
       - name: Checkout repository
@@ -24,5 +34,5 @@ jobs:
             --resource-group NetRG2 \
             --name azure-network3.2-${{ github.run_id }} \
             --template-file azure-network3.2-backup.bicep \
-            --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}'\
+            --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}' \
             --query "properties.outputs"

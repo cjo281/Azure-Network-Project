@@ -3,7 +3,7 @@ name: Scheduled Deployment
 
 on:
   schedule:
-    - cron: '0 2 * * *' # Every day at 2 AM UTC
+    - cron: '0 2 * * *' # Every day run at 2 AM UTC
 
 jobs:
   deploy:
@@ -25,5 +25,5 @@ jobs:
             --resource-group NetRG2 \
             --name azure-network3.2-${{ github.run_id }} \
             --template-file azure-network3.2.bicep \
-            --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}'\
+            --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}' \
             --query "properties.outputs"

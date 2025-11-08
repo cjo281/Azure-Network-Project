@@ -1,4 +1,10 @@
-#Current workflowww
+#---------------------------------------------------------------------------------------------
+#THIS YOUR PRIMARY DEPLOYMENT WORKFLOW
+#It triggers automatically on every push to main
+#Deploys your azure-network3.2.bicep file
+#Uses the latest parameters and secrets
+#Think of it as your CI/CD engine — it’s the heartbeat of your infrastructure pipeline.
+#---------------------------------------------------------------------------------------------
 
 name: Deploy Azure Bicep Project
 
@@ -29,5 +35,5 @@ jobs:
           --resource-group NetRG2 \
           --name azure-network3.2-${{ github.run_id }} \
           --template-file azure-network3.2.bicep \
-          --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}'\
+          --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}' \
           --query "properties.outputs"

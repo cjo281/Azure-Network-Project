@@ -1,4 +1,16 @@
+#------------------------------------------------------------------------------------------
 #Captures outputs from deployment and logs them
+#This workflow is designed to capture and display the outputs of your deployment, like:
+#webVMIP
+#appVMIP
+#workspaceId
+#It’s useful for:
+#Logging
+#Debugging
+#Passing values to other workflows (e.g., testing or monitoring)
+#OPTIONAL: You could also merge this into deploy.yml if you want fewer workflows.
+#------------------------------------------------------------------------------------------
+
 name: Capture Deployment Outputs
 
 on:

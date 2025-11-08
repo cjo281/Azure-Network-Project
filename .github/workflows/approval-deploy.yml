@@ -2,7 +2,13 @@
 name: Production Deployment with Approval
 
 on:
-  workflow_dispatch:
+  #workflow_dispatch:    # Manual trigger from GitHub Actions UI (run workflow button)
+  
+  #I skipped workflow_dispatch because i want this to be automatic and ask any user to review the deployment
+  push:
+    branches:
+      - main
+
 
 jobs:
   deploy:
@@ -27,5 +33,5 @@ jobs:
             --resource-group NetRG2 \
             --name azure-network3.2-${{ github.run_id }} \
             --template-file azure-network3.2.bicep \
-            --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}'\
+            --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}' \
             --query "properties.outputs"
