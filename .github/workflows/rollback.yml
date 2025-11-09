@@ -1,34 +1,46 @@
 #Implements auto-rollback logic (manual or triggered by failure
 name: Rollback Deployment
 
+#on workflow_dispatch:: Allows you to manually trigger this workflow from the Actions tab (run workfow button)
 on:
 #Including "workflow_dispatch" does not make the workflow manual-only — it simply adds the option to run it manually.
-  workflow_dispatch:   #run manually (run workfow button)
-       # Manual trigger from Actions tab
-
+  workflow_dispatch:   
+      
   # Optional: Automatically run rollback if main deployment fails
   # Uncomment below to enable auto-rollback
-  workflow_run:    ## Automatic trigger
+
+  #Automatic trigger
+  workflow_run:                     #Automatically triggers this workflow when the specified workflow (Deploy Azure Bicep Project) finishes.
     workflows: ["Deploy Azure Bicep Project"]
-    types:
+    types:                          #Runs whether the deployment succeeded or failed — but you’ll filter based on failure later.
         - completed
 
-jobs:
-  rollback:
-    runs-on: ubuntu-latest
-    environment: staging
+jobs:       #Defines the set of tasks to run.
+  rollback:                         #the name of the job
+    runs-on: ubuntu-latest          #This tells GitHub to run the job on a virtual machine using the latest version of Ubuntu Linux.
+                                    #GitHub provides these runners for free — they’re like temporary computers that execute your workflow.
+                                    #You’re not installing Ubuntu — GitHub is giving you a clean Linux environment to run your deployment.
+                                    #You need an OS to run commands like az deployment group create, and Ubuntu is a common, stable choice.
 
+    environment: staging            #useful for environment protection rules or audit tracking.
+    #The job was skipped because neither one was true
+    # If either one is true then it will work
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'failure' }}
 
+#steps to execute
     steps:
+        #Checks out your code so the runner has access to your files (like the Bicep template).
       - name: Checkout repository
         uses: actions/checkout@v3
 
+        #Logs into Azure using credentials stored in GitHub Secrets.
+        #These credentials must include service principal info (client ID, secret, tenant, subscription).
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+        #Runs the Azure CLI to deploy the backup Bicep template.   
       - name: Rollback to Previous Template
         run: |
           az deployment group create \
@@ -37,3 +49,8 @@ jobs:
             --template-file azure-network3.2-backup.bicep \
             --parameters adminUsername='azureuser' adminPassword='${{ secrets.ADMIN_PASSWORD }}' \
             --query "properties.outputs"
+        #NetRG2 as the resource group
+        #A unique deployment name using github.run_id
+        # The backup template file: azure-network3.2-backup.bicep
+        # Parameters for username and password
+        #--query "properties.outputs" to extract deployment outputs
