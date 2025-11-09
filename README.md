@@ -1,7 +1,9 @@
 AZURE INFRASTRUCTURE DEPLOYMENT WITH BICEP & GITHUB ACTIONS
+
 This project automates the deployment of a complete Azure infrastructure using Bicep and GitHub Actions. It provisions a virtual network, subnets, network security groups, virtual machines, and monitoring — all orchestrated through a robust CI/CD pipeline.
 
 PROJECT OVERVIEW
+
 Bicep Template: azure-network3.2.bicep
     This file defines the infrastructure:
 
@@ -13,6 +15,7 @@ Bicep Template: azure-network3.2.bicep
     - Optional NAT Gateway (commented out for future use)
 
 GITHUB ACTIONS WORKFLOWS 
+
 All workflows are located in ".github/workflows/"
 
     Workflow	
@@ -28,8 +31,11 @@ All workflows are located in ".github/workflows/"
         Purpose: Runs daily at 2 AM UTC to deploy infrastructure on a schedule
 
 SECRETS REQUIRED
+
 Set the following secrets in your GitHub repository:
+
     AZURE_CREDENTIALS: Azure service principal credentials in JSON format
+    
     ADMIN_PASSWORD: Secure password for VM admin user
 
 DEPLOYMENT FLOW
@@ -52,12 +58,14 @@ From the Bicep deployment:
     - workspaceId: ID of the Log Analytics workspace
 
 FILE STRUCTURE
+
 .github/workflows/
-├── deploy.yml
-├── approval-deploy.yml
-├── output.yml
-├── rollback.yml
-├── scheduled-deploy.yml
+
+    deploy.yml
+    approval-deploy.yml
+    output.yml
+    rollback.yml
+    scheduled-deploy.yml
 
 azure-network3.2.bicep
 azure-network3.2-backup.bicep
